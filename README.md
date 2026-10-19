@@ -3,6 +3,18 @@
 **LazyVisCode** is a **LazyVim** preset, aims to reproduce VSCode coding style
 in NeoVim, while keeps vim style as possible.
 
+## Notes
+
+This config directory does not contains files that managed by UI, like:
+
+- `lazy-lock.json`
+- `lazyvim.json`
+
+This makes you can install your own extras as you wish, id not changing configs
+from git repository.
+
+If you want to modify some features, you may clone one of your own.
+
 ## Implemented Features
 
 ### Keybindings
@@ -73,17 +85,27 @@ following languages:
 #### Mode auto-switch
 
 **Different windows now have its own editing mode, switching to another window will
-recovery their editing mode, or use *NORMAL* as default, instead of keep global
-editing mode.** This is implemented by a custom mini plugin *plugin-pre-window-mode*.
+recovery their editing mode, or use *NORMAL*/*TERMINAL* as default[^2], instead
+of keep global editing mode.** This is implemented by a custom mini plugin
+*plugin-pre-window-mode*.
 
 It makes you can switch to file tree window while editing file using *INSERT* mode
 (no matter using hotkeys or mouses), that file tree window will use default *NORMAL*
 mode, makes editor's *INSERT* mode not affecting using file tree. When switch to
 file editor back, that *INSERT* mode will be automatically recovered.
 
-#### Misc editor features
+> [^2]: Terminal window/buffer is slightly different. Since leaving-window event cannot
+> get *TERMINAL* mode (only *NORMAL(TERMINAL)* can be get), so that we makes it
+> enter into *TERMINAL* mode every when it enters terminal window.
+>
+> But one window may contains regular file and terminal buffer, and NVim will
+> change editing mode to *NORMAL* every you leave terminal buffer. So that, if you
+> change between buffers inside one window, you may got *NORMAL* mode at last. Since
+> our editing mode auto-switch is based on window, this may not be fixed so easy.
 
-**Auto-format have disabled.**
+#### Others
+
+- **Auto-format have disabled.**
 
 ## Contributing
 
