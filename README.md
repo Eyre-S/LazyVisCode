@@ -29,7 +29,7 @@ If you want to modify some features, you may clone one of your own.
   - Delete lines via `C-S-k` (not used by me actually)
   - Undo/Redo via `C-z`/(`C-S-z` or `C-y`)
 - VSCode LSP keybindings:
-  - Rename symbol via `<F2>`
+  - Rename symbol via `<F2>` (should work on both vanilla & *inc-rename*)
   - Comment line/lines via `C-/` `C-_` `A-/` [^1]
 - VSCode style Tab auto-suggest (via *blink.cmp*)
   - Use `↑/↓` to change suggestions, without auto-accept that
@@ -37,6 +37,7 @@ If you want to modify some features, you may clone one of your own.
   - `ESC` to cancel auto-suggest, without exiting *INSERT* mode.
 
 > [^1]:
+> 
 > `C-/` does not works on my machines, since my terminal does not send any of
 > keybindings with `/.,';`, only with `Alt` is available, but `A-/` is
 > *reversed search* in vim... So, `A-/` is only available in *INSERT* and
@@ -50,15 +51,15 @@ If you want to modify some features, you may clone one of your own.
 
 ### Displays
 
-**LazyVisCode uses *neo-tree* instead of *snacks.explorer***, provides better user
+- **LazyVisCode uses *neo-tree* instead of *snacks.explorer***, provides better user
 experience (in my own word), also provides additional *Opened Buffers(Tabs)*,
 *Git*, *Symbols* tabs.
 
-**Opening buffers header (provided by *bufferline*) now will always show,** even
+- **Opening buffers header (provided by *bufferline*) now will always show,** even
 only one uffer is opened. Since nvim does not allow one window area has no
 buffer, an New File* buffer will be opened when last buffer is closed.
 
-**Use absolute line number in default** (LazyVim use relative number).
+- **Use absolute line number in default** (LazyVim use relative number).
 
 ### Behaviors
 
@@ -85,16 +86,21 @@ following languages:
 #### Mode auto-switch
 
 **Different windows now have its own editing mode, switching to another window will
-recovery their editing mode, or use *NORMAL*/*TERMINAL* as default[^2], instead
-of keep global editing mode.** This is implemented by a custom mini plugin
-*plugin-pre-window-mode*.
+recovery their editing mode, or use *NORMAL* as default[^2], instead of keep global
+editing mode.** This is implemented by a custom mini plugin *plugin-pre-window-mode*.
+
+For extension/plugin floating window capability consideration, all non-editor
+window shares one global editor mode. Since most non-editor windows that plugin
+provided are always used in *NORMAL* mode, this should be enough.
 
 It makes you can switch to file tree window while editing file using *INSERT* mode
 (no matter using hotkeys or mouses), that file tree window will use default *NORMAL*
 mode, makes editor's *INSERT* mode not affecting using file tree. When switch to
 file editor back, that *INSERT* mode will be automatically recovered.
 
-> [^2]: Terminal window/buffer is slightly different. Since leaving-window event cannot
+> [^2]:
+> 
+> Terminal window/buffer is slightly different. Since leaving-window event cannot
 > get *TERMINAL* mode (only *NORMAL(TERMINAL)* can be get), so that we makes it
 > enter into *TERMINAL* mode every when it enters terminal window.
 >

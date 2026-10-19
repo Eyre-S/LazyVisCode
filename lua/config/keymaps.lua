@@ -66,10 +66,9 @@ map("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", "Move line up")
 map("i", "<C-Up>", "<Esc>:m .-2<CR>==gi", "Move line up")
 
 -- Copy Line Down
-map("i", "<A-S-Down>", "<Esc>yypgi", "Duplicate line down")
+map("i", "<A-S-Down>", "<Esc>yypgi<Down>", "Duplicate line down")
 -- Copy Line Up
-map("i", "<A-S-Up>", "<Esc>ypgi", "Duplicate line up")
-
+map("i", "<A-S-Up>", "<Esc>yykpgi<Up>", "Duplicate line up")
 -- Delete Line
 map("i", "<C-S-k>", "<C-o>dd", "Delete line")
 
@@ -86,11 +85,8 @@ map("s",       "<A-/>", "<C-o>gc",                   "Toggle Comment", { remap =
 
 ---=== Symbol Rename ===---
 
-local lsp_rename = function()
-  vim.lsp.buf.rename()
-end
-
-vim.keymap.set({ "n", "i", "s" }, "<F2>", lsp_rename, { desc = "Rename Symbol" })
+vim.keymap.set({ "n" }, "<F2>", " cr",      { remap = true, desc = "Rename Symbol (inc-rename)" })
+vim.keymap.set({ "i" }, "<F2>", "<C-o> cr", { remap = true, desc = "Rename Symbol (inc-rename)" })
 
 ---=== Auto Fill Patch ===---
 
